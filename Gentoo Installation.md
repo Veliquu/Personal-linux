@@ -56,6 +56,11 @@ Lastly we want to initialise wpa_supplicant with the information we have given i
 ```bash
 wpa_supplicant -B -i [wifi card] -c /etc/wpa_supplicant/wpa_supplicant-[wifi card].conf
 ```
+### Install sudo
+```bash
+emerge -av app-admin/sudo
+``` 
+Uncomment `%wheel ALL=(ALL:ALL) ALL` in `/etc/sudoers` to give sudo permissions to everyone in group wheel.  
 ## Installing [xorg](https://wiki.gentoo.org/wiki/Xorg/Guide)
 Add `USE="X"` to `/etc/portage/make.conf`.  
 Need to also add:
@@ -68,3 +73,11 @@ To find out what to use, use commands
 portageq envvar VIDEO_CARDS
 portageq ennvar INPUT_DEVICES
 ```
+Installing xorg, xorg-drivers and xterm
+```bash
+$~ emerge -av x11-base/xorg-server x11-base/xorg-drivers
+$~ emerge -av x11-terms/xterm
+```
+After try and see if xorg is working use command `startx`.  
+If it works it opens 3 terminal windows and you can exit that from root window and writing `exit`.
+
