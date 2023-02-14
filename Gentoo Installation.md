@@ -1,4 +1,7 @@
 # Using [the gentoo handboog](https://wiki.gentoo.org/wiki/Handbook:Main_Page) 
+## Useful
+### Update config files
+Use `dispatch-conf`
 ## During installation
 ### Installing base system
 Before running
