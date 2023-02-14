@@ -2,6 +2,18 @@
 ## Useful
 ### Update config files
 Use `dispatch-conf`
+### Edit kernel
+```bash
+$~ cd /usr/src/linux
+/usr/src/linux$~ make menuconfig
+```
+And to recompile the kernel
+```bash
+$~ make && make modules_install
+$~ mount /boot
+$~ make install
+```
+
 ## During installation
 ### Installing base system
 Before running
