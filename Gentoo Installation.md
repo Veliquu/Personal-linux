@@ -81,3 +81,10 @@ $~ emerge -av x11-terms/xterm
 After try and see if xorg is working use command `startx`.  
 If it works it opens 3 terminal windows and you can exit that from root window and writing `exit`.
 
+### Installing qtile
+Install dmenu alongside qtile
+```bash
+emerge -av x11-wm/qtile x11-misc/dmenu
+```
+
+
