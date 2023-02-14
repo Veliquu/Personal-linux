@@ -35,6 +35,10 @@ GRUB_DISABLE_OS_PROBER=false
 ```
 This is to detect other operating systems from attached drives.  
 ## After installation  
+Add elogind to boot
+```bash
+$~ rc-update add elogind boot
+```
 ### Wifi working
 Get your wifi card with `ifconfig`  
 Making wifi working after installation I created file:  
