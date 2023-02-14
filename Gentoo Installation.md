@@ -21,7 +21,7 @@ Install `sys-boot/os-prober` and then add the following line to `/etc/default/gr
 ```bash
 GRUB_DISABLE_OS_PROBER=false
 ```
-This is to detect existing distributions.  
+This is to detect other operating systems from attached drives.  
 ## After installation  
 ### Wifi working
 Get your wifi card with `ifconfig`  
