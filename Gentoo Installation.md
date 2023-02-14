@@ -14,7 +14,7 @@ This makes compiling time little faster.
 ### Configuring kernel
 During installation I use genkernel and I update kernel after installation if I need to change something to make things work.  
 ### Configuring the bootloader
-Install `sys-boot/os-prober` and then add line to `/etc/default/grub`  
+Install `sys-boot/os-prober` and then add the following line to `/etc/default/grub`  
 ```bash
 GRUB_DISABLE_OS_PROBER=false
 ```
