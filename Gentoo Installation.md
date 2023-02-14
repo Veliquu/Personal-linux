@@ -44,3 +44,15 @@ Lastly we want to initialise wpa_supplicant with the information we have given i
 ```bash
 wpa_supplicant -B -i [wifi card] -c /etc/wpa_supplicant/wpa_supplicant-[wifi card].conf
 ```
+## Installing [xorg](https://wiki.gentoo.org/wiki/Xorg/Guide)
+Add `USE="X"` to `/etc/portage/make.conf`.  
+Need to also add:
+```bash
+VIDEO_CARDS=""
+INPUT_DEVICES=""
+```
+To find out what to use, use commands
+```bash
+portageq envvar VIDEO_CARDS
+portageq ennvar INPUT_DEVICES
+```
