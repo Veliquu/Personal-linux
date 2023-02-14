@@ -1,4 +1,5 @@
 # Using [the gentoo handboog](https://wiki.gentoo.org/wiki/Handbook:Main_Page) 
+Install with openRC
 ## Useful
 ### Update config files
 Use `dispatch-conf`
