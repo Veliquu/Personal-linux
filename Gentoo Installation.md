@@ -36,7 +36,7 @@ update_config=1
 ```
 After that we use `wpa_passphrase` to get your wifi info to the config file
 ```bash
-$~ wpa_supplicant 'SSID' 'password' >> /etc/wpa_supplicant/wpa_supplicant-[wifi card].conf
+$~ wpa_passphrase 'SSID' 'password' >> /etc/wpa_supplicant/wpa_supplicant-[wifi card].conf
 ```
 You can remove the line showing your password as it is commented out.  
 It helps security to not have file including your wifi password.  
