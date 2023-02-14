@@ -1,5 +1,6 @@
-## Using [the gentoo handboog](https://wiki.gentoo.org/wiki/Handbook:Main_Page) 
-### During installation
+# Using [the gentoo handboog](https://wiki.gentoo.org/wiki/Handbook:Main_Page) 
+## During installation
+### Installing base system
 Before running
 ```bash
 $~ emerge --ask --verbose --update --deep --newuse @world
@@ -10,6 +11,8 @@ ACCEPT_LICENSE="*"
 USE="-qtwebengine -webengine"
 ```
 This makes compiling time little faster.  
+### Configuring kernel
+During installation I use genkernel and I update kernel after installation if I need to change something to make things work.  
 
 ## After installation  
 ### Wifi working
