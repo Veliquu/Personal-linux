@@ -1,0 +1,179 @@
+# [Configuring the network](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking)
+Use either `ifconfig` or `ip addr` command to determine your network interface.  
+  
+Tets the network:
+```bash
+root # ping -c 3 www.gentoo.org
+```
+## Automatic network configuration
+If the ping doesn't work or you are using wifi, you need to configurate the network.  
+  
+### Default: Using net-setup
+Easy way to configurate automaticly is to run the `net-setup` script:
+```bash
+root # net-setup wlp2s0
+```
+* You would change `wlp2s0` to the network interface that you have.  
+  
+After that you test the network as previously mentioned.  
+* Sometimes I need to run `net-setup` twice for it to work.  
+
+### Using DHCP
+DHCP makes it possible to automatically receive networking information.  
+To have a network interface receive this information automatically, use `dhcpcd`:
+```bash
+root # dhcpcd wlp2s0
+```
+  
+# [Preparing the disk](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks)
+You need to know what type of storage your system have.  
+You can check that with `blkid` command.  
+|Type of device               |Default device handle |
+|-----------------------------|----------------------|
+|SATA, SAS, SCSI, or USB flash|/dev/sda              |
+|NVM Express (NVMe)           |/dev/nvme0n1          |
+|MMC, eMMC, and SD            |/dev/mmcblk0          |
+I will be using NVMe.  
+    
+## Partitioning the disk with GPT for UEFI
+### Default partitioning scheme
+This is the default partitioning scheme that [gentoo handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks) recommends.   
+|Partition        |Filesystem                                   |Size            |Description              |
+|-----------------|---------------------------------------------|----------------|-------------------------|
+|/dev/nvme0n1p1   |fat32 (UEFI) or ext4 (BIOS - aka Legacy boot)|256M            |Boot/EFI system partition|
+|/dev/nvme0n1p2   |(swap)                                       |RAM size * 2    |Swap partition           |
+|/dev/nvme0n1p3   |ext4                                         |Rest of the disk|Root partition           |
+  
+### Vieving the current partition layout
+Use `fdisk` for partitions. Fire up `fdisk` against the disk (in this example, I use (dev/nvme0n1):
+```bash
+root # fdisk /dev/nvme0n1
+```
+Use `p` key to display the current partition configuration:
+```bash
+Command (m for help): p
+Disk /dev/nvme0n1: 238.47 GiB, 256060514304 bytes, 500118192 sectors
+Disk model: SAMSUNG MZVLW256HEHP-000L2
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 4F22FCA0-ADA9-9C47-ADD4-EFA49E554A1D
+
+Device            Start       End   Sectors   Size  Type
+/dev/nvme0n1p1     2048    526335    524228   256M  EFI system
+/dev/nvme0n1p2   526336  17303551  16777216     8G  Linux swap
+/dev/nvme0n1p3 17303552 500117503 482813952 230.2G  Linux filesystem 
+```
+### Creating new disklabel
+Type `g` to create new GPT disklabes on the disk; this will remove all existing partitions.
+```bash
+Command (m for help): g
+Created new GPT disklabel (GUID: 3B79857F-A896-D74D-B87A-483C0EAF5741).
+```
+### Creating the EFI system partition (ESP)
+Create small EFI system partition, which will also be mounted as /boot.  
+Tynpe `n`to create new partition followed by `1` to select the first partition.  
+When prompted for the first sector, make sure it starts from 2048 (which may be needed for the boot loader) and hit `Enter`.  
+When prompted for the last sector, type +256M to create a partition 256 Mbyte in size:
+```bash
+Command (m for help): n
+Partition number (1-128, default 1): 1
+First sector (2048-60549086, default 2048): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-60549086, default 60549086): +256M
+ 
+Created a new partition 1 of type 'Linux filesystem' and of size 256 MiB.
+```
+Mark the partition as EFI system partition:
+```bash
+Command (m for help): t
+Selected partition 1
+Partition type (type L to list all types): 1
+Changed type of partition 'Linux filesystem' to 'EFI System'.
+```
+### Creating the swap partition
+Next, to create the swap partition, type `n` to create a new partition, then type `2` to create the second partition, /dev/nvme0n1p2.  
+When prompted for the first sector, hit `Enter`.  
+When prompted for the last sector, type +8G (or any other size needed for the swap space) to create a partition 8GB in size.
+```bash
+Command (m for help): n
+Partition number (2-128, default 2): 
+First sector (526336-60549086, default 526336): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (526336-60549086, default 60549086): +4G
+ 
+Created a new partition 2 of type 'Linux filesystem' and of size 4 GiB.
+```
+After all this is done, type `t` to set the partition type, `2` to select the partition just created and then type in `19` to set the partition type to "Linux Swap".
+```bash
+Command (m for help): t
+Partition number (1,2, default 2): 2
+Partition type (type L to list all types): 19
+ 
+Changed type of partition 'Linux filesystem' to 'Linux swap'.
+```
+### Creating the root partition
+Finally, to create the root partition, type `n` to create a new partition.  
+Then type `3` to create the third partition, /dev/nvme0n1p3.  
+When prompted for the first sector, hit `Enter`.  
+When prompted for the last sector, hit `Enter` to create a partition that takes up the rest of the remaining space on the disk.  
+After completing these steps, typing `p` should display a partition table that looks similar to this:
+```bash
+Command (m for help): p
+Disk /dev/nvme0n1: 238.47 GiB, 256060514304 bytes, 500118192 sectors
+Disk model: SAMSUNG MZVLW256HEHP-000L2
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 3B79857F-A896-D74D-B87A-483C0EAF5741
+
+Device            Start       End   Sectors   Size  Type
+/dev/nvme0n1p1     2048    526335    524228   256M  EFI system
+/dev/nvme0n1p2   526336  34383767  33554432    16G  Linux swap
+/dev/nvme0n1p3 34080768 500117503 466036736 222.2G  Linux filesystem 
+```
+### Saving the partition layout
+To save the partition layout and exit fdisk, type `w`.
+```bash
+Command (m for help): w
+```
+  
+## Creating the file system
+Different filesystems:
+|Filesystem |Cration command |On minimal CD?  |Package             |
+|-----------|----------------|----------------|--------------------|
+|btrfs      |mkfs.btrfs      |Yes             |sys-fs/btrfs-progs  |
+|ext4       |mkfs.ext4       |Yes             |sys-fs/e2fsprogs    |
+|f2fs       |mkfs.f2fs       |Yes             |sys-fs/f2fs-tools   |
+|jfs        |mkfs.jfs        |Yes             |sys-fs/jfsutils     |
+|reiserfs   |mkfs.reiserfs   |Yes             |sys-fs/reiserfsprogs|
+|xfs        |mkfs.xfs        |Yes             |sys-fs/xfsprogs     |
+|vfat       |mkfs.vfat       |Yes             |sys-fs/dosfstools   |
+|NTFS       |mkfs.ntfs       |Yes             |sys-fs/ntfs3g       |
+  
+This guide will be using `vfat` and `ext4`. For other filesystems look [gentoo handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks).  
+  
+For instance, to have the EFI system partition partition (/dev/nvme0n1p1) as FAT32 and the root partition (/dev/nvme0n1p3) as ext4 as used in the example partition structure, the following commands would be used: 
+```bash
+root # mkfs.vfat -F 32 /dev/nvme0n1p1
+```
+```bash
+root # mkfs.ext4 /dev/nvme0n1p3
+```
+### Activating the swap partition
+`mkswap` is the command that is used to inialize swap partitions:
+```bash
+root # mkswap /dev/nvme0n1p2
+```
+To activate the swap partition, use `swapon`:
+```bash
+root # swapon /dev/nvme0n1p2
+```
+### Mounting the root partition
+Now that the partitions have been initialized and are housing a filesystem, it is time to mount those partitions.  
+Use the `mount` command, but don't forget to create the necessary mount directories for every partition created. As an example we mount the root partition:
+```bash
+root # mount /dev/nvme0n1p3 /mnt/gentoo
+```
+---
+[Installing Stage3]()
