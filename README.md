@@ -11,5 +11,5 @@ Processor Intel i5 quadcore
 
 # Lenovo Legion 5 Pro
 Ram  16 GiB
-Processor   AMD Ryzen 7 5800H with Radeon Graphics
+Processor   AMD Ryzen 7 5800H with Radeon Graphics  
 GPU Geforce RTX 3060 Mobile / MAx-Q
