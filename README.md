@@ -1,16 +1,10 @@
 # Linux-builds
 Notes for installing different distros in differrent machines
 
-# Asus Zenbook Duo Pro
-Ram 16 GiB  
-Processor Intel i7-9750H 6 cores, 12 threads  
-GBU Geforce RTX 2060  
+# Personal machines running linux
 
-# Lenovo Yoga 520
-Ram 8 GiB  
-Processor Intel i5 quadcore  
-
-# Lenovo Legion 5 Pro
-Ram  16 GiB  
-Processor   AMD Ryzen 7 5800H with Radeon Graphics  
-GPU Geforce RTX 3060 Mobile / MAx-Q
+|Laptop               |Processor                              |Cores/Threads  |Graphics                        |RAM     |
+|---------------------|---------------------------------------|---------------|--------------------------------|--------|
+|Asus Zenbook Duo Pro |Intel i7-9750H                         |6/12           |Geforce RTX 2060                |16 GiB  |
+|Lenovo Legion 5 Pro  |AMD Ryzen 7 5800H with Radeon Graphics |8/16           |Geforce RTX 3060 Mobile / MAx-Q |16 GiB  |
+|Lenovo Yoga 520      |Intel i5 quadcore                      |4/8            |Intel                           |8 GiB   |
