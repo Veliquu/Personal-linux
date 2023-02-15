@@ -4,6 +4,7 @@ Notes for installing different distros in differrent machines
 # Asus Zenbook Duo Pro
 Ram 16 GiB  
 Processor Intel i7-9750H 6 cores, 12 threads  
+GBU Geforce RTX 2060  
 
 # Lenovo Yoga 520
 Ram 8 GiB  
