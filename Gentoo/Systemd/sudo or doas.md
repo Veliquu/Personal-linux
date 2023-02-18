@@ -4,10 +4,15 @@ Installing
 ```bash
 root $ emerge --ask app-admin/sudo
 ```
-Uncomment following line in `/etc/sudoers.tmp`
+To configurate go to the folder with following command
+```bash
+root $ visudo
+```
+Then uncomment following line in `/etc/sudoers.tmp`
 ```bash
 %wheel ALL=(ALL) ALL
 ```
+Now `wheel` group can make root commands with sudo.  
 # [DOAS](https://wiki.gentoo.org/wiki/Doas)
 Installing
 ```bash
