@@ -28,5 +28,5 @@ or
 Using the `persist` keyword `doas` can remember an authenticated user and will not require confirmation by password for a time period of five minutes after the last `doas` command was entered in the terminal window.  
 For this add following line to `/etc/doas.conf`: 
 ```bash
-permint presist :wheel
+permit presist :wheel
 ```
