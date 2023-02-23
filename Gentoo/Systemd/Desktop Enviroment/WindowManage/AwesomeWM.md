@@ -1,11 +1,5 @@
 # [Awesome](https://wiki.gentoo.org/wiki/Awesome)
-[Miscellaneous](##Miscellaneous)
-- [D-bus](###D-bus)
-- [Polkit](###Check-if-you-have-polkit-installed:)
-- [Udisks](###Udisks)  
 
-[X-server](##X-server)  
-[Awesome](##Awesome)
 # Prerequisites
 ## Services
 Choose exactly one of:
@@ -17,7 +11,7 @@ If `gentoolkit` is not installed, install it with:
 ``` bash
 root $ emerge -ask gentoolkit
 ```
-###D-bus
+### D-bus  
 Check if you have D-bus installed:
 ```bash
 root $ equery list "*" | grep dbus
@@ -70,8 +64,17 @@ root $ usermod -a -G plugdev larry
 Follow the guide from [here](https://github.com/Veliquu/Personal-linux/blob/main/Gentoo/Systemd/Desktop%20Enviroment/Xorg.md).  
 After that return here.
 
-## Awesome
+# Awesome
 Installing awesomewm:
 ```bash
 root $ emerge --ask x11-misc/awesome
 ```
+You need to create awesome directoy in your home directory and copy the default configuration file there.
+```bash
+user $ mkdir -p ~/.config/awesome/
+```
+```bash
+user $ cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua
+```
+
+
