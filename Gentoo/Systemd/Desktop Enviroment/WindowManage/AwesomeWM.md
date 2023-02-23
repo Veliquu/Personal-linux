@@ -1,7 +1,7 @@
 # [Awesome](https://wiki.gentoo.org/wiki/Awesome)
 [Miscellaneous](##Miscellaneous)
 - [D-bus](###D-bus)
-- [Polkit](###Polkit)
+- [Polkit](###Check-if-you-have-polkit-installed:)
 - [Udisks](###Udisks)  
 
 [X-server](##X-server)  
@@ -37,8 +37,7 @@ root $ rc-update add dbus default
 ```
   
   
-### Polkit
-Check if you have polkit installed:
+### Check if you have polkit installed:
 ```bash
 root $ equery list "*" | grep polkit
 ```
