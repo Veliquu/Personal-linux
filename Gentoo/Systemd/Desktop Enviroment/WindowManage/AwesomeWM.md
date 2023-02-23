@@ -17,7 +17,7 @@ If `gentoolkit` is not installed, install it with:
 ``` bash
 root $ emerge -ask gentoolkit
 ```
-### D-bus
+###D-bus
 Check if you have D-bus installed:
 ```bash
 root $ equery list "*" | grep dbus
