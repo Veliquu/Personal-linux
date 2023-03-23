@@ -31,7 +31,7 @@ To use `persist` keywoard:
 ```bash 
 root $ echo "app-admin/doas persist" >> /etc/portage/package.use/doas
 ```
-Then recompile the package.
+Then recompile the package.  
 Then add the following line to `/etc/doas.conf`: 
 ```bash
 permit presist :wheel
