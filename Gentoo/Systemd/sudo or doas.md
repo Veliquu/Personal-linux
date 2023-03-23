@@ -24,9 +24,15 @@ So add the following line to `/etc/doas.conf`.
 root $ permit :wheel
 ```
 or  
-  
+
+
 Using the `persist` keyword `doas` can remember an authenticated user and will not require confirmation by password for a time period of five minutes after the last `doas` command was entered in the terminal window.  
-For this add following line to `/etc/doas.conf`: 
+To use `persist` keywoard:
+```bash 
+root $ echo "app-admin/doas persist" >> /etc/portage/package.use/doas
+```
+Then recompile the package.
+Then add the following line to `/etc/doas.conf`: 
 ```bash
 permit presist :wheel
 ```
