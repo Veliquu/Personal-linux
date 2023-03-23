@@ -45,6 +45,15 @@ export GLFW_IM_MODULE=ibus
 
 exec Hyprland
 ```
+Mke the file executable:
+```bash
+chmod 744 ~/.local/bin/wrappedhl
+```
+Afetr that I created alias for executing the scriptin `.bashrc`:
+```bash
+alias hypr=´~/.local/bin/wrappedhl´
+```
+## Monitor
 Next unmask and install `wlr-randr` to get your monitor information:
 ```bash
 echo "gui-apps/wlr-randr **" >> /etc/portage/package.accpet_keywords/wlr-randr
