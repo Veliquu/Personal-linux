@@ -35,5 +35,5 @@ Then recompile the package.
 
 Then add the following line to `/etc/doas.conf`: 
 ```bash
-permit presist :wheel
+permit persist :wheel
 ```
