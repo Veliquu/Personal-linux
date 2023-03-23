@@ -49,7 +49,7 @@ Mke the file executable:
 ```bash
 chmod 744 ~/.local/bin/wrappedhl
 ```
-Afetr that I created alias for executing the scriptin `.bashrc`:
+Afetr that I created alias for executing the script in `.bashrc`:
 ```bash
 alias hypr=´~/.local/bin/wrappedhl´
 ```
