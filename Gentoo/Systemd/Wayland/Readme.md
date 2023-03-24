@@ -1,6 +1,11 @@
 During gentoo installataion use `USE="wayland"` in `/etc/portage/make.conf`
 
 # Window Manager
+## Screenlock
+Installed `swaylock`:
+```bash
+emerge -av gui-apps/swaylock
+```
 ## Clipboard Manager
 Installed `wl-clippoard` to be aplte to copy and paste in the system.
 ```bash
