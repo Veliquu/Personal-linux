@@ -53,9 +53,30 @@ Afetr that I created alias for executing the script in `.bashrc`:
 ```bash
 alias hypr=´~/.local/bin/wrappedhl´
 ```
-## Monitor
+## [Monitor](https://wiki.hyprland.org/Configuring/Monitors/)
 Next unmask and install `wlr-randr` to get your monitor information:
 ```bash
 echo "gui-apps/wlr-randr **" >> /etc/portage/package.accpet_keywords/wlr-randr
 emerge -av wlr-randr
+```
+Get the information of your monitor with `wlr-randr` command:
+```bash
+gentoo ~ $ wlr-randr
+eDP-1 "AU Optronics 0x423D (eDP-1)"
+  Make: AU Optronics
+  Model: 0x423D
+  Serial: (null)
+  Physical size: 310x170 mm
+  Enabled: yes
+  Modes:
+    1920x1080 px, 60.049000 Hz (preferred, current)
+  Position: 0,0
+  Transform: normal
+  Scale: 1.000000
+  Adaptive Sync: disabled
+```
+Then use that information to config your monitor in `~/.config/hypr/hyprland.config`.  
+For example:
+```bash
+monitor=eDP-1, 1920x1080@60, 0x0, 1
 ```
