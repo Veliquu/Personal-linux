@@ -1,4 +1,9 @@
-During gentoo installataion use `USE="wayland"` in `/etc/portage/make.conf`
+During gentoo installataion use `USE="wayland"` in `/etc/portage/make.conf`  
+Add the following line to `/etc/portage/make.cong`:
+```bash
+ACCEPT_KEYWORDS="~amd64"
+```
+Whit this you don´t need to be unmasking packages all the time.
 
 # Window Manager
 ## Screenlock
